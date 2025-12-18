@@ -1,0 +1,13 @@
+[
+  {
+    "id": "KE-0001",
+    "name": "Godfrey Alindi",
+    "gender": "M",
+    "birth_year": null,
+    "ethnicity": "Luhya",
+    "clan": null,
+    "region": "Western Kenya",
+    "sources": ["self"],
+    "confidence": 1.0
+  }
+]
