@@ -8,7 +8,7 @@ async function loadFamily() {
   const peopleById = {};
   people.forEach(p => peopleById[p.id] = p);
 
-  // Root = person with highest confidence and source "self"
+  // Root = person with explicit self source
   const root = people.find(p => p.sources.includes("self"));
 
   const generations = [];
@@ -18,7 +18,7 @@ async function loadFamily() {
 
   while (true) {
     const nextGen = relationships
-      .filter(r => currentGen.map(p => p.id).includes(r.from))
+      .filter(r => currentGen.some(p => p.id === r.from))
       .map(r => peopleById[r.to])
       .filter(Boolean);
 
@@ -32,7 +32,8 @@ async function loadFamily() {
 }
 
 function renderGenerations(generations) {
-  const container = document.querySelector('.container');
+  const root = document.getElementById('family-root');
+  root.innerHTML = ''; // 🔑 THIS WAS MISSING
 
   generations.forEach((gen, index) => {
     const section = document.createElement('div');
@@ -54,12 +55,7 @@ function renderGenerations(generations) {
       section.appendChild(div);
     });
 
-    container.appendChild(section);
-  });
-}
-
-loadFamily();
-
+    root.appendChild(section);
   });
 }
 
