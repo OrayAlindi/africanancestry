@@ -3,11 +3,33 @@
     "id": "KE-0001",
     "name": "Godfrey Alindi",
     "gender": "M",
-    "birth_year": null,
+    "birth_year": 1985,
     "ethnicity": "Luhya",
     "clan": null,
     "region": "Western Kenya",
     "sources": ["self"],
     "confidence": 1.0
+  },
+  {
+    "id": "KE-0002",
+    "name": "Sylvester Oray",
+    "gender": "M",
+    "birth_year": 1949,
+    "ethnicity": "Lu0",
+    "clan": null,
+    "region": "Western Kenya",
+    "sources": ["oral: self"],
+    "confidence": 0.9
+  },
+  {
+    "id": "KE-0003",
+    "name": "Lucy Alindi",
+    "gender": "F",
+    "birth_year": 1956,
+    "ethnicity": "Luo",
+    "clan": null,
+    "region": "Western Kenya",
+    "sources": ["oral: self"],
+    "confidence": 0.9
   }
 ]
