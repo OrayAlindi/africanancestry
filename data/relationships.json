@@ -14,3 +14,32 @@
     "confidence": 0.9
   }
 ]
+,
+{
+  "from": "KE-0002",
+  "to": "KE-0004",
+  "type": "parent",
+  "sources": ["oral: father"],
+  "confidence": 0.7
+},
+{
+  "from": "KE-0002",
+  "to": "KE-0005",
+  "type": "parent",
+  "sources": ["oral: father"],
+  "confidence": 0.7
+},
+{
+  "from": "KE-0003",
+  "to": "KE-0006",
+  "type": "parent",
+  "sources": ["oral: mother"],
+  "confidence": 0.7
+},
+{
+  "from": "KE-0003",
+  "to": "KE-0007",
+  "type": "parent",
+  "sources": ["oral: mother"],
+  "confidence": 0.7
+}
