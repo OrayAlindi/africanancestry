@@ -1,1 +1,16 @@
-[]
+[
+  {
+    "from": "KE-0001",
+    "to": "KE-0002",
+    "type": "parent",
+    "sources": ["oral: self"],
+    "confidence": 0.9
+  },
+  {
+    "from": "KE-0001",
+    "to": "KE-0003",
+    "type": "parent",
+    "sources": ["oral: self"],
+    "confidence": 0.9
+  }
+]
