@@ -8,35 +8,58 @@ async function loadFamily() {
   const peopleById = {};
   people.forEach(p => peopleById[p.id] = p);
 
-  // Build generations manually for now (v1 logic)
-  const gen1 = people.filter(p => p.id === "KE-0001");
-  const gen2 = relationships
-    .filter(r => r.from === "KE-0001")
-    .map(r => peopleById[r.to]);
+  // Root = person with highest confidence and source "self"
+  const root = people.find(p => p.sources.includes("self"));
 
-  const gen3 = relationships
-    .filter(r => gen2.map(p => p.id).includes(r.from))
-    .map(r => peopleById[r.to]);
+  const generations = [];
+  generations.push([root]);
 
-  renderGeneration("gen1", gen1);
-  renderGeneration("gen2", gen2);
-  renderGeneration("gen3", gen3);
+  let currentGen = [root];
+
+  while (true) {
+    const nextGen = relationships
+      .filter(r => currentGen.map(p => p.id).includes(r.from))
+      .map(r => peopleById[r.to])
+      .filter(Boolean);
+
+    if (nextGen.length === 0) break;
+
+    generations.push(nextGen);
+    currentGen = nextGen;
+  }
+
+  renderGenerations(generations);
 }
 
-function renderGeneration(containerId, people) {
-  const container = document.getElementById(containerId);
-  container.innerHTML = '';
+function renderGenerations(generations) {
+  const container = document.querySelector('.container');
 
-  people.forEach(p => {
-    const div = document.createElement('div');
-    div.className = 'person';
-    div.innerHTML = `
-      <strong>${p.name}</strong>
-      <div class="meta">
-        ${p.ethnicity || '—'} · ${p.region || '—'} · Confidence: ${p.confidence}
-      </div>
-    `;
-    container.appendChild(div);
+  generations.forEach((gen, index) => {
+    const section = document.createElement('div');
+    section.className = 'generation';
+
+    const heading = document.createElement('h2');
+    heading.textContent = `Generation ${index + 1}`;
+    section.appendChild(heading);
+
+    gen.forEach(p => {
+      const div = document.createElement('div');
+      div.className = 'person';
+      div.innerHTML = `
+        <strong>${p.name}</strong>
+        <div class="meta">
+          ${p.sources.join(', ')} · Confidence: ${p.confidence}
+        </div>
+      `;
+      section.appendChild(div);
+    });
+
+    container.appendChild(section);
+  });
+}
+
+loadFamily();
+
   });
 }
 
