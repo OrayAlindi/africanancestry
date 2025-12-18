@@ -33,3 +33,48 @@
     "confidence": 0.9
   }
 ]
+,
+{
+  "id": "KE-0004",
+  "name": "Paternal Grandfather of Godfrey Alindi",
+  "gender": "M",
+  "birth_year": null,
+  "ethnicity": "Luhya",
+  "clan": null,
+  "region": "Western Kenya",
+  "sources": ["oral: father"],
+  "confidence": 0.7
+},
+{
+  "id": "KE-0005",
+  "name": "Paternal Grandmother of Godfrey Alindi",
+  "gender": "F",
+  "birth_year": null,
+  "ethnicity": "Luhya",
+  "clan": null,
+  "region": "Western Kenya",
+  "sources": ["oral: father"],
+  "confidence": 0.7
+},
+{
+  "id": "KE-0006",
+  "name": "Maternal Grandfather of Godfrey Alindi",
+  "gender": "M",
+  "birth_year": null,
+  "ethnicity": "Luhya",
+  "clan": null,
+  "region": "Western Kenya",
+  "sources": ["oral: mother"],
+  "confidence": 0.7
+},
+{
+  "id": "KE-0007",
+  "name": "Maternal Grandmother of Godfrey Alindi",
+  "gender": "F",
+  "birth_year": null,
+  "ethnicity": "Luhya",
+  "clan": null,
+  "region": "Western Kenya",
+  "sources": ["oral: mother"],
+  "confidence": 0.7
+}
