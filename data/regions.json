@@ -1,0 +1,9 @@
+[
+  {
+    "id": "REG-WK-KE",
+    "name": "Western Kenya",
+    "modern_countries": ["Kenya"],
+    "historical_notes": "Region spanning pre-colonial Luhya settlements",
+    "confidence": 0.9
+  }
+]
