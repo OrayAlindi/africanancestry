@@ -1,671 +1,195 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>African Ancestry — Discover Your Roots</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Jost:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+  <title>African Ancestry — Coming Soon</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Jost:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
     :root {
-      --earth:  #1C0F06;
-      --sienna: #8B3A1E;
-      --gold:   #C8922A;
-      --amber:  #E8B84B;
-      --kente:  #D4500A;
-      --cream:  #F5EDD8;
-      --sand:   #C8AB88;
-      --night:  #0D0804;
-      --muted:  #7A6550;
+      --gold: #C8922A; --amber: #E8B84B; --sienna: #8B3A1E;
+      --cream: #F5EDD8; --sand: #C8AB88; --night: #0D0804; --muted: #7A6550;
     }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      background: var(--night);
-      color: var(--cream);
-      font-family: 'Jost', sans-serif;
-      overflow-x: hidden;
-    }
-
-    /* ══ NAV ══ */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 1.4rem 5rem;
-      background: linear-gradient(to bottom, rgba(13,8,4,0.97), transparent);
-    }
-    .logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.4rem; font-weight: 900; color: var(--cream);
-      letter-spacing: 0.02em;
-    }
-    .logo span { color: var(--amber); }
-    nav ul { list-style: none; display: flex; gap: 2.5rem; align-items: center; }
-    nav ul li a {
-      font-size: 0.88rem; font-weight: 500;
-      color: var(--sand); text-decoration: none;
-      transition: color 0.25s;
-    }
-    nav ul li a:hover { color: var(--amber); }
-    .btn-nav {
-      border: 1px solid var(--gold);
-      color: var(--amber) !important;
-      padding: 0.55rem 1.5rem;
-      transition: background 0.25s, color 0.25s !important;
-    }
-    .btn-nav:hover { background: var(--gold); color: var(--night) !important; }
-
-    /* ══ HERO ══ */
-    .hero {
-      position: relative; min-height: 100vh;
-      display: flex; flex-direction: column; justify-content: center;
-      padding: 0 5rem; overflow: hidden;
-    }
-    .hero-bg {
-      position: absolute; inset: 0;
+    html, body { height: 100%; background: var(--night); color: var(--cream); font-family: 'Jost', sans-serif; overflow: hidden; }
+    .bg {
+      position: fixed; inset: 0; z-index: 0;
       background:
-        radial-gradient(ellipse 65% 80% at 78% 50%, rgba(139,58,30,0.28) 0%, transparent 65%),
-        radial-gradient(ellipse 50% 50% at 10% 85%, rgba(200,146,42,0.1) 0%, transparent 55%),
-        linear-gradient(155deg, #0D0804 0%, #160904 60%, #0D0804 100%);
+        radial-gradient(ellipse 60% 70% at 80% 50%, rgba(139,58,30,0.25) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 50% at 15% 80%, rgba(200,146,42,0.1) 0%, transparent 55%),
+        linear-gradient(160deg, #0D0804 0%, #160904 60%, #0D0804 100%);
     }
-    .hero-pattern {
-      position: absolute; inset: 0; opacity: 0.03;
+    .bg-grid {
+      position: fixed; inset: 0; z-index: 0; opacity: 0.025;
       background-image:
-        repeating-linear-gradient(0deg, transparent 0px, transparent 38px, rgba(200,146,42,1) 38px, rgba(200,146,42,1) 40px),
-        repeating-linear-gradient(90deg, transparent 0px, transparent 38px, rgba(200,146,42,1) 38px, rgba(200,146,42,1) 40px);
+        repeating-linear-gradient(0deg, transparent 0px, transparent 48px, rgba(200,146,42,1) 48px, rgba(200,146,42,1) 50px),
+        repeating-linear-gradient(90deg, transparent 0px, transparent 48px, rgba(200,146,42,1) 48px, rgba(200,146,42,1) 50px);
     }
-    .hero-orb {
-      position: absolute; right: 8%; top: 50%; transform: translateY(-50%);
-      width: 500px; height: 500px; border-radius: 50%;
-      background: radial-gradient(circle at 38% 38%, rgba(139,58,30,0.38) 0%, rgba(200,146,42,0.06) 50%, transparent 70%);
-      border: 1px solid rgba(200,146,42,0.15);
-      animation: slowSpin 70s linear infinite;
+    .orb {
+      position: fixed; right: -100px; top: 50%; transform: translateY(-50%);
+      width: 600px; height: 600px; border-radius: 50%; z-index: 0;
+      background: radial-gradient(circle at 35% 35%, rgba(139,58,30,0.3) 0%, rgba(200,146,42,0.05) 50%, transparent 70%);
+      border: 1px solid rgba(200,146,42,0.12);
+      animation: slowSpin 80s linear infinite;
     }
-    .hero-orb::before {
-      content: ''; position: absolute; inset: 40px; border-radius: 50%;
-      border: 1px dashed rgba(200,146,42,0.1);
+    .orb::before { content: ''; position: absolute; inset: 50px; border-radius: 50%; border: 1px dashed rgba(200,146,42,0.08); }
+    @keyframes slowSpin { to { transform: translateY(-50%) rotate(360deg); } }
+    .symbol {
+      position: fixed; left: -60px; bottom: -60px;
+      width: 300px; height: 300px; opacity: 0.04; z-index: 0;
+      animation: breathe 8s ease-in-out infinite;
     }
-    .hero-orb::after {
-      content: ''; position: absolute; inset: 90px; border-radius: 50%;
-      border: 1px solid rgba(200,146,42,0.07);
+    @keyframes breathe { 0%,100% { opacity: 0.04; } 50% { opacity: 0.07; } }
+    .page {
+      position: relative; z-index: 10; min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: space-between;
+      padding: 2.5rem 5rem;
     }
-    @keyframes slowSpin {
-      to { transform: translateY(-50%) rotate(360deg); }
+    .top-bar {
+      display: flex; justify-content: space-between; align-items: center;
+      animation: fadeDown 1s ease both;
     }
-
-    /* Adinkra-inspired SVG symbol */
-    .hero-symbol {
-      position: absolute; right: 15.5%; top: 50%; transform: translate(50%, -50%);
-      width: 180px; height: 180px; opacity: 0.13;
-      animation: breathe 7s ease-in-out infinite;
+    @keyframes fadeDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+    .logo { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 900; color: var(--cream); }
+    .logo span { color: var(--amber); }
+    .top-tag {
+      font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--muted); border: 1px solid rgba(200,146,42,0.2); padding: 0.4rem 1rem;
     }
-    @keyframes breathe {
-      0%,100% { opacity: 0.13; transform: translate(50%,-50%) scale(1); }
-      50%      { opacity: 0.2;  transform: translate(50%,-50%) scale(1.05); }
+    .main {
+      display: flex; flex-direction: column; justify-content: center; align-items: flex-start;
+      flex: 1; padding: 3rem 0; animation: fadeUp 1s 0.2s ease both;
     }
-
-    .hero-content {
-      position: relative; z-index: 5; max-width: 680px;
-      animation: fadeUp 1s 0.15s ease both;
-    }
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(36px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
     .eyebrow {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.68rem; letter-spacing: 0.28em; text-transform: uppercase;
-      color: var(--gold); margin-bottom: 1.6rem;
-      display: flex; align-items: center; gap: 1rem;
+      font-family: 'Space Mono', monospace; font-size: 0.68rem; letter-spacing: 0.28em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 1.8rem; display: flex; align-items: center; gap: 1rem;
     }
-    .eyebrow::before { content: ''; width: 36px; height: 1px; background: var(--gold); }
-
-    h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(3.2rem, 6.5vw, 6rem);
-      font-weight: 900; line-height: 0.95;
-      margin-bottom: 1.8rem;
-    }
+    .eyebrow::before { content: ''; width: 36px; height: 1px; background: var(--gold); flex-shrink: 0; }
+    h1 { font-family: 'Playfair Display', serif; font-size: clamp(3rem, 7vw, 6.5rem); font-weight: 900; line-height: 0.92; margin-bottom: 2rem; max-width: 800px; }
     h1 em { font-style: italic; color: var(--amber); display: block; }
-
-    .hero-sub {
-      font-size: 1.15rem; font-weight: 300; line-height: 1.8;
-      color: var(--sand); max-width: 500px; margin-bottom: 3rem;
+    .sub { font-size: 1.1rem; font-weight: 300; line-height: 1.85; color: var(--sand); max-width: 480px; margin-bottom: 3.5rem; }
+    .countdown { display: flex; gap: 2.5rem; margin-bottom: 3.5rem; flex-wrap: wrap; align-items: flex-start; }
+    .count-block { text-align: center; }
+    .count-num { font-family: 'Playfair Display', serif; font-size: 3.5rem; font-weight: 900; color: var(--amber); line-height: 1; display: block; }
+    .count-sep { font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 900; color: rgba(200,146,42,0.3); padding-top: 0.1rem; }
+    .count-label { font-family: 'Space Mono', monospace; font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-top: 0.4rem; display: block; }
+    .notify-form { display: flex; gap: 0; max-width: 480px; width: 100%; }
+    .notify-form input {
+      flex: 1; background: rgba(255,255,255,0.04); border: 1px solid rgba(200,146,42,0.25); border-right: none;
+      color: var(--cream); font-family: 'Jost', sans-serif; font-size: 0.9rem; font-weight: 300;
+      padding: 0.9rem 1.4rem; outline: none; transition: border-color 0.25s;
     }
-
-    .hero-actions { display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap; }
-    .btn-primary {
-      background: var(--gold); color: var(--night);
-      font-family: 'Space Mono', monospace;
-      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
-      text-decoration: none; padding: 1rem 2.4rem;
-      display: inline-block; position: relative; overflow: hidden;
-      transition: transform 0.2s;
+    .notify-form input::placeholder { color: var(--muted); }
+    .notify-form input:focus { border-color: rgba(200,146,42,0.6); }
+    .notify-form button {
+      background: var(--gold); color: var(--night); font-family: 'Space Mono', monospace;
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      border: none; cursor: pointer; padding: 0.9rem 1.8rem;
+      transition: background 0.25s, transform 0.2s; white-space: nowrap;
     }
-    .btn-primary::after {
-      content: ''; position: absolute; inset: 0;
-      background: var(--amber); transform: translateX(-102%);
-      transition: transform 0.3s ease;
-    }
-    .btn-primary:hover::after { transform: translateX(0); }
-    .btn-primary:hover { transform: translateY(-2px); }
-    .btn-primary span { position: relative; z-index: 1; }
-    .btn-ghost {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--cream); text-decoration: none;
-      display: flex; align-items: center; gap: 0.6rem;
-      transition: color 0.25s;
-    }
-    .btn-ghost:hover { color: var(--amber); }
-    .btn-ghost svg { width: 18px; height: 18px; }
-
-    .hero-stats {
-      position: absolute; bottom: 0; left: 0; right: 0;
-      display: flex; gap: 0;
-      border-top: 1px solid rgba(200,146,42,0.18);
-      animation: fadeUp 1s 0.4s ease both;
-    }
-    .stat {
-      padding: 2rem 3.5rem;
-      border-right: 1px solid rgba(200,146,42,0.12);
-      flex: 1;
-    }
-    .stat:last-child { border-right: none; }
-    .stat-num {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.2rem; font-weight: 700; color: var(--amber);
-      display: block; line-height: 1;
-    }
-    .stat-label {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--muted); margin-top: 0.4rem; display: block;
-    }
-
-    /* ══ FEATURES ══ */
-    .features {
-      background: #100C07;
-      padding: 8rem 5rem;
-    }
-    .features-inner { max-width: 1200px; margin: 0 auto; }
-    .features-header {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 4rem; align-items: end; margin-bottom: 5rem;
-    }
-    .section-label {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.65rem; letter-spacing: 0.28em; text-transform: uppercase;
-      color: var(--gold); margin-bottom: 1rem;
-    }
-    .section-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 700; line-height: 1.15;
-    }
-    .section-desc {
-      font-size: 1.05rem; font-weight: 300; line-height: 1.85;
-      color: var(--sand);
-    }
-    .features-grid {
-      display: grid; grid-template-columns: repeat(4, 1fr);
-      border-top: 1px solid rgba(200,146,42,0.2);
-    }
-    .feature-card {
-      padding: 2.5rem 2rem;
-      border-right: 1px solid rgba(200,146,42,0.1);
-      position: relative; transition: background 0.35s;
-    }
-    .feature-card:last-child { border-right: none; }
-    .feature-card:hover { background: rgba(139,58,30,0.08); }
-    .f-icon {
-      width: 44px; height: 44px; color: var(--gold); margin-bottom: 1.4rem;
-    }
-    .feature-card h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.2rem; font-weight: 700; margin-bottom: 0.7rem;
-    }
-    .feature-card p {
-      font-size: 0.92rem; line-height: 1.75; color: var(--sand); font-weight: 300;
-    }
-    .f-num {
-      position: absolute; bottom: 1.2rem; right: 1.5rem;
-      font-family: 'Space Mono', monospace;
-      font-size: 0.58rem; color: rgba(200,146,42,0.25);
-    }
-
-    /* ══ HOW IT WORKS ══ */
-    .how { padding: 8rem 5rem; }
-    .how-inner { max-width: 1200px; margin: 0 auto; }
-    .how-header { text-align: center; margin-bottom: 5rem; }
-    .how-header .section-title { font-size: clamp(2rem, 3.5vw, 3rem); }
-    .steps {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      border: 1px solid rgba(200,146,42,0.18);
-    }
-    .step {
-      padding: 3.5rem 2.5rem;
-      border-right: 1px solid rgba(200,146,42,0.12);
-      position: relative;
-    }
-    .step:last-child { border-right: none; }
-    .step-num {
-      font-family: 'Playfair Display', serif;
-      font-size: 5.5rem; font-weight: 900;
-      color: rgba(200,146,42,0.1); line-height: 1;
-      margin-bottom: 1.5rem;
-    }
-    .step h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.35rem; color: var(--amber); margin-bottom: 0.8rem;
-    }
-    .step p {
-      font-size: 0.95rem; line-height: 1.8; color: var(--sand); font-weight: 300;
-    }
-    .step-arrow {
-      position: absolute; top: 50%; right: -14px;
-      transform: translateY(-50%);
-      width: 28px; height: 28px;
-      background: var(--gold); border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      z-index: 2;
-    }
-    .step:last-child .step-arrow { display: none; }
-    .step-arrow svg { width: 14px; height: 14px; color: var(--night); }
-
-    /* ══ TESTIMONIALS ══ */
-    .testimonials { background: #100C07; padding: 8rem 5rem; }
-    .test-inner { max-width: 1200px; margin: 0 auto; }
-    .test-header { display: flex; justify-content: space-between; align-items: end; margin-bottom: 4rem; }
-    .test-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
-    .test-card {
-      background: rgba(255,255,255,0.02);
-      border: 1px solid rgba(200,146,42,0.1);
-      padding: 2.5rem;
-      transition: border-color 0.3s, background 0.3s;
-    }
-    .test-card:hover {
-      border-color: rgba(200,146,42,0.3);
-      background: rgba(139,58,30,0.07);
-    }
-    .test-quote {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.05rem; font-style: italic; line-height: 1.8;
-      color: var(--cream); margin-bottom: 2rem;
-    }
-    .test-quote::before { content: '\201C'; color: var(--gold); font-size: 2rem; line-height: 0; vertical-align: -0.4em; margin-right: 4px; }
-    .test-author { display: flex; align-items: center; gap: 1rem; }
-    .test-avatar {
-      width: 44px; height: 44px; border-radius: 50%;
-      background: linear-gradient(135deg, var(--sienna), var(--gold));
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700;
-      color: var(--cream);
-    }
-    .test-name { font-weight: 600; font-size: 0.9rem; }
-    .test-location {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.6rem; letter-spacing: 0.1em;
-      color: var(--muted); margin-top: 0.2rem;
-    }
-
-    /* ══ CTA BANNER ══ */
-    .cta-banner {
-      padding: 8rem 5rem;
-      position: relative; overflow: hidden;
-      background: linear-gradient(135deg, var(--sienna) 0%, #5A1F08 50%, var(--earth) 100%);
-    }
-    .cta-banner::before {
-      content: ''; position: absolute; inset: 0; opacity: 0.07;
-      background-image:
-        repeating-linear-gradient(45deg, transparent 0px, transparent 20px, rgba(255,255,255,1) 20px, rgba(255,255,255,1) 22px),
-        repeating-linear-gradient(-45deg, transparent 0px, transparent 20px, rgba(255,255,255,1) 20px, rgba(255,255,255,1) 22px);
-    }
-    .cta-inner {
-      max-width: 1200px; margin: 0 auto;
+    .notify-form button:hover { background: var(--amber); transform: translateY(-1px); }
+    .notify-thanks { display: none; font-family: 'Space Mono', monospace; font-size: 0.72rem; letter-spacing: 0.1em; color: var(--amber); margin-top: 1rem; }
+    .bottom-bar {
       display: flex; justify-content: space-between; align-items: center;
-      position: relative; z-index: 2;
-      flex-wrap: wrap; gap: 3rem;
+      border-top: 1px solid rgba(200,146,42,0.12); padding-top: 1.5rem;
+      animation: fadeUp 1s 0.5s ease both; flex-wrap: wrap; gap: 1rem;
     }
-    .cta-text h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 900; line-height: 1.1;
-      margin-bottom: 1rem;
-    }
-    .cta-text p {
-      font-size: 1.05rem; font-weight: 300; color: rgba(245,237,216,0.8);
-    }
-    .cta-actions { display: flex; gap: 1.2rem; flex-wrap: wrap; }
-    .btn-white {
-      background: var(--cream); color: var(--earth);
-      font-family: 'Space Mono', monospace;
-      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
-      text-decoration: none; padding: 1rem 2.4rem;
-      transition: background 0.25s, transform 0.2s;
-      display: inline-block;
-    }
-    .btn-white:hover { background: var(--amber); transform: translateY(-2px); }
-    .btn-outline-white {
-      border: 1px solid rgba(245,237,216,0.5); color: var(--cream);
-      font-family: 'Space Mono', monospace;
-      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
-      text-decoration: none; padding: 1rem 2.4rem;
-      transition: border-color 0.25s, background 0.25s;
-      display: inline-block;
-    }
-    .btn-outline-white:hover { border-color: var(--cream); background: rgba(245,237,216,0.08); }
-
-    /* ══ FOOTER ══ */
-    footer {
-      background: #080503;
-      padding: 4rem 5rem 2rem;
-      border-top: 1px solid rgba(200,146,42,0.12);
-    }
-    .footer-inner { max-width: 1200px; margin: 0 auto; }
-    .footer-top {
-      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
-      gap: 4rem; margin-bottom: 4rem;
-    }
-    .footer-brand .logo { display: block; margin-bottom: 1rem; }
-    .footer-brand p {
-      font-size: 0.9rem; font-weight: 300; line-height: 1.8; color: var(--muted);
-    }
-    .footer-col h4 {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
-      color: var(--gold); margin-bottom: 1.2rem;
-    }
-    .footer-col ul { list-style: none; }
-    .footer-col ul li { margin-bottom: 0.7rem; }
-    .footer-col ul li a {
-      font-size: 0.88rem; color: var(--muted); text-decoration: none;
-      transition: color 0.25s;
-    }
-    .footer-col ul li a:hover { color: var(--cream); }
-    .footer-bottom {
-      border-top: 1px solid rgba(200,146,42,0.1);
-      padding-top: 2rem;
-      display: flex; justify-content: space-between; align-items: center;
-    }
-    .footer-bottom p {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.62rem; letter-spacing: 0.08em;
-      color: var(--muted);
-    }
-
-    /* ══ RESPONSIVE ══ */
-    @media (max-width: 900px) {
-      nav { padding: 1.2rem 2rem; }
-      nav ul { display: none; }
-      .hero { padding: 8rem 2rem 0; }
-      .hero-orb, .hero-symbol { display: none; }
-      .hero-stats { position: static; flex-wrap: wrap; }
-      .stat { padding: 1.5rem 2rem; flex: 1 1 40%; }
-      .features, .how, .testimonials, .cta-banner, footer { padding: 5rem 2rem; }
-      .features-grid, .steps, .test-grid { grid-template-columns: 1fr; }
-      .feature-card, .step { border-right: none; border-bottom: 1px solid rgba(200,146,42,0.1); }
-      .step-arrow { display: none; }
-      .features-header, .test-header { grid-template-columns: 1fr; }
-      .footer-top { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
-      .cta-inner { flex-direction: column; }
+    .bottom-bar p { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.1em; color: var(--muted); }
+    .social-links { display: flex; gap: 1.5rem; }
+    .social-links a { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.25s; }
+    .social-links a:hover { color: var(--amber); }
+    @media (max-width: 768px) {
+      .page { padding: 2rem; overflow-y: auto; }
+      html, body { overflow: auto; }
       h1 { font-size: 3rem; }
+      .orb { display: none; }
+      .notify-form { flex-direction: column; }
+      .notify-form input { border-right: 1px solid rgba(200,146,42,0.25); border-bottom: none; }
     }
   </style>
 </head>
 <body>
+  <div class="bg"></div>
+  <div class="bg-grid"></div>
+  <div class="orb"></div>
 
-  <!-- ══ NAV ══ -->
-  <nav>
-    <div class="logo">African <span>Ancestry</span></div>
-    <ul>
-      <li><a href="#features">What We Offer</a></li>
-      <li><a href="#how">How It Works</a></li>
-      <li><a href="#stories">Stories</a></li>
-      <li><a href="#" class="btn-nav">Start Your Journey</a></li>
-    </ul>
-  </nav>
+  <svg class="symbol" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="100" cy="100" r="90" stroke="#C8922A" stroke-width="2"/>
+    <circle cx="100" cy="100" r="60" stroke="#C8922A" stroke-width="1.5"/>
+    <path d="M60 100 Q100 60 140 100 Q100 140 60 100Z" stroke="#C8922A" stroke-width="2" fill="rgba(200,146,42,0.15)"/>
+    <circle cx="100" cy="100" r="15" fill="rgba(200,146,42,0.2)" stroke="#C8922A" stroke-width="1.5"/>
+    <line x1="100" y1="10" x2="100" y2="190" stroke="#C8922A" stroke-width="0.8" stroke-dasharray="4 6"/>
+    <line x1="10" y1="100" x2="190" y2="100" stroke="#C8922A" stroke-width="0.8" stroke-dasharray="4 6"/>
+  </svg>
 
-  <!-- ══ HERO ══ -->
-  <section class="hero">
-    <div class="hero-bg"></div>
-    <div class="hero-pattern"></div>
-
-    <div class="hero-orb"></div>
-
-    <!-- Adinkra Gye Nyame symbol -->
-    <svg class="hero-symbol" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="100" cy="100" r="90" stroke="#C8922A" stroke-width="2"/>
-      <circle cx="100" cy="100" r="60" stroke="#C8922A" stroke-width="1.5"/>
-      <path d="M100 20 C60 20 30 55 30 100 C30 145 60 180 100 180 C140 180 170 145 170 100 C170 55 140 20 100 20Z" stroke="#C8922A" stroke-width="1.5" fill="none"/>
-      <path d="M60 100 Q100 60 140 100 Q100 140 60 100Z" stroke="#C8922A" stroke-width="2" fill="rgba(200,146,42,0.08)"/>
-      <circle cx="100" cy="100" r="15" fill="rgba(200,146,42,0.2)" stroke="#C8922A" stroke-width="1.5"/>
-      <line x1="100" y1="10" x2="100" y2="190" stroke="#C8922A" stroke-width="0.8" stroke-dasharray="4 6"/>
-      <line x1="10" y1="100" x2="190" y2="100" stroke="#C8922A" stroke-width="0.8" stroke-dasharray="4 6"/>
-    </svg>
-
-    <div class="hero-content">
-      <div class="eyebrow">Tracing Your Heritage</div>
-      <h1>
-        Know Where
-        <em>You Come From.</em>
-      </h1>
-      <p class="hero-sub">
-        African Ancestry helps you trace your family lineage across the African continent — through DNA, family tree building, and a living community of people on the same journey.
-      </p>
-      <div class="hero-actions">
-        <a href="#" class="btn-primary"><span>Begin Your Journey</span></a>
-        <a href="#how" class="btn-ghost">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/>
-          </svg>
-          See How It Works
-        </a>
-      </div>
+  <div class="page">
+    <div class="top-bar">
+      <div class="logo">African <span>Ancestry</span></div>
+      <div class="top-tag">Something Big Is Coming</div>
     </div>
 
-    <div class="hero-stats">
-      <div class="stat">
-        <span class="stat-num">54+</span>
-        <span class="stat-label">African Nations Covered</span>
-      </div>
-      <div class="stat">
-        <span class="stat-num">1,200+</span>
-        <span class="stat-label">Ethnic Groups in Database</span>
-      </div>
-      <div class="stat">
-        <span class="stat-num">50K+</span>
-        <span class="stat-label">Families Connected</span>
-      </div>
-      <div class="stat">
-        <span class="stat-num">98%</span>
-        <span class="stat-label">Match Accuracy</span>
-      </div>
-    </div>
-  </section>
+    <div class="main">
+      <div class="eyebrow">We're Almost Ready</div>
+      <h1>Your Roots<em>Await You.</em></h1>
+      <p class="sub">African Ancestry is launching soon — a platform to trace your lineage, build your family tree, explore your heritage, and connect with your people across the continent and diaspora.</p>
 
-  <!-- ══ FEATURES ══ -->
-  <section class="features" id="features">
-    <div class="features-inner">
-      <div class="features-header">
-        <div>
-          <div class="section-label">What We Offer</div>
-          <h2 class="section-title">Everything You Need to Uncover Your Story</h2>
-        </div>
-        <p class="section-desc">
-          From DNA testing to family tree tools and a rich community — African Ancestry brings together the resources and people you need to reconnect with your roots.
-        </p>
+      <div class="countdown">
+        <div class="count-block"><span class="count-num" id="days">00</span><span class="count-label">Days</span></div>
+        <div class="count-sep">:</div>
+        <div class="count-block"><span class="count-num" id="hours">00</span><span class="count-label">Hours</span></div>
+        <div class="count-sep">:</div>
+        <div class="count-block"><span class="count-num" id="mins">00</span><span class="count-label">Minutes</span></div>
+        <div class="count-sep">:</div>
+        <div class="count-block"><span class="count-num" id="secs">00</span><span class="count-label">Seconds</span></div>
       </div>
-      <div class="features-grid">
-        <div class="feature-card">
-          <svg class="f-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/>
-          </svg>
-          <h3>Family Tree Builder</h3>
-          <p>Construct and visualise your family tree across generations with our easy drag-and-drop tool — no technical skills needed.</p>
-          <span class="f-num">01</span>
-        </div>
-        <div class="feature-card">
-          <svg class="f-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <path d="M4.5 12.75l6 6 9-13.5"/><circle cx="12" cy="12" r="10"/>
-          </svg>
-          <h3>DNA Ancestry Testing</h3>
-          <p>Our African-specific DNA database pinpoints your ethnic origins down to specific regions, peoples, and lineages.</p>
-          <span class="f-num">02</span>
-        </div>
-        <div class="feature-card">
-          <svg class="f-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <path d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"/>
-          </svg>
-          <h3>Cultural Education</h3>
-          <p>Learn about traditions, languages, history, and customs of your ancestral peoples through curated guides and articles.</p>
-          <span class="f-num">03</span>
-        </div>
-        <div class="feature-card">
-          <svg class="f-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <path d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z"/>
-          </svg>
-          <h3>Community & Forums</h3>
-          <p>Connect with others tracing the same lineage. Share discoveries, ask questions, and build relationships across the diaspora.</p>
-          <span class="f-num">04</span>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- ══ HOW IT WORKS ══ -->
-  <section class="how" id="how">
-    <div class="how-inner">
-      <div class="how-header">
-        <div class="section-label" style="text-align:center; justify-content:center;">The Journey</div>
-        <h2 class="section-title">Three Steps to Your Roots</h2>
+      <div class="notify-form">
+        <input type="email" id="emailInput" placeholder="Enter your email to be notified"/>
+        <button onclick="handleNotify()">Notify Me</button>
       </div>
-      <div class="steps">
-        <div class="step">
-          <div class="step-num">01</div>
-          <h3>Create Your Profile</h3>
-          <p>Sign up and tell us what you already know about your family — names, places, dates. Every detail helps us connect the dots.</p>
-          <div class="step-arrow">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-num">02</div>
-          <h3>Test Your DNA or Build Your Tree</h3>
-          <p>Order a DNA kit, or start building your family tree using our tools. Upload records, add relatives, and watch your story grow.</p>
-          <div class="step-arrow">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-num">03</div>
-          <h3>Discover & Connect</h3>
-          <p>Receive your ancestry report, explore your ethnic heritage, and connect with DNA matches and community members who share your lineage.</p>
-        </div>
-      </div>
+      <p class="notify-thanks" id="thanks">You are on the list — we will be in touch soon.</p>
     </div>
-  </section>
 
-  <!-- ══ TESTIMONIALS ══ -->
-  <section class="testimonials" id="stories">
-    <div class="test-inner">
-      <div class="test-header">
-        <div>
-          <div class="section-label">Real Stories</div>
-          <h2 class="section-title">From Our Community</h2>
-        </div>
-        <a href="#" class="btn-ghost" style="color: var(--sand);">
-          Read All Stories
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
-      </div>
-      <div class="test-grid">
-        <div class="test-card">
-          <p class="test-quote">I discovered my great-grandmother was Yoruba from Nigeria. I wept. Forty years of wondering, answered in weeks.</p>
-          <div class="test-author">
-            <div class="test-avatar">A</div>
-            <div>
-              <div class="test-name">Amara Johnson</div>
-              <div class="test-location">Atlanta, USA</div>
-            </div>
-          </div>
-        </div>
-        <div class="test-card">
-          <p class="test-quote">The family tree tool is so simple. I had five generations mapped out in a single afternoon. Absolutely incredible.</p>
-          <div class="test-author">
-            <div class="test-avatar">K</div>
-            <div>
-              <div class="test-name">Kwame Asante</div>
-              <div class="test-location">London, UK</div>
-            </div>
-          </div>
-        </div>
-        <div class="test-card">
-          <p class="test-quote">Through the community forums I found a distant cousin in Dakar. We video called last month. This platform changed my life.</p>
-          <div class="test-author">
-            <div class="test-avatar">M</div>
-            <div>
-              <div class="test-name">Marie-Claire Diop</div>
-              <div class="test-location">Paris, France</div>
-            </div>
-          </div>
-        </div>
+    <div class="bottom-bar">
+      <p>2025 African Ancestry · africanancestry.world</p>
+      <div class="social-links">
+        <a href="#">Facebook</a>
+        <a href="#">Instagram</a>
+        <a href="#">Twitter / X</a>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- ══ CTA BANNER ══ -->
-  <section class="cta-banner">
-    <div class="cta-inner">
-      <div class="cta-text">
-        <h2>Your Ancestors Are Waiting to Be Found.</h2>
-        <p>Join over 50,000 families who have already begun their journey home.</p>
-      </div>
-      <div class="cta-actions">
-        <a href="#" class="btn-white">Start for Free</a>
-        <a href="#" class="btn-outline-white">Learn More</a>
-      </div>
-    </div>
-  </section>
+  <script>
+    // Change this to your real launch date
+    const launchDate = new Date('2025-12-01T00:00:00');
 
-  <!-- ══ FOOTER ══ -->
-  <footer>
-    <div class="footer-inner">
-      <div class="footer-top">
-        <div class="footer-brand">
-          <div class="logo">African <span style="color: var(--amber);">Ancestry</span></div>
-          <p style="margin-top: 1rem;">Helping the African diaspora and all people of African descent discover, celebrate, and connect with their roots.</p>
-        </div>
-        <div class="footer-col">
-          <h4>Explore</h4>
-          <ul>
-            <li><a href="#">DNA Testing</a></li>
-            <li><a href="#">Family Tree</a></li>
-            <li><a href="#">Cultural Guides</a></li>
-            <li><a href="#">Community</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h4>Company</h4>
-          <ul>
-            <li><a href="#">About Us</a></li>
-            <li><a href="#">Our Mission</a></li>
-            <li><a href="#">Press</a></li>
-            <li><a href="#">Contact</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h4>Legal</h4>
-          <ul>
-            <li><a href="#">Privacy Policy</a></li>
-            <li><a href="#">Terms of Use</a></li>
-            <li><a href="#">Cookie Policy</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>© 2025 African Ancestry. All rights reserved.</p>
-        <p>Built with purpose. Rooted in history.</p>
-      </div>
-    </div>
-  </footer>
+    function updateCountdown() {
+      const diff = launchDate - new Date();
+      if (diff <= 0) return;
+      const d = Math.floor(diff / 86400000);
+      const h = Math.floor((diff % 86400000) / 3600000);
+      const m = Math.floor((diff % 3600000) / 60000);
+      const s = Math.floor((diff % 60000) / 1000);
+      document.getElementById('days').textContent  = String(d).padStart(2,'0');
+      document.getElementById('hours').textContent = String(h).padStart(2,'0');
+      document.getElementById('mins').textContent  = String(m).padStart(2,'0');
+      document.getElementById('secs').textContent  = String(s).padStart(2,'0');
+    }
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    function handleNotify() {
+      const email = document.getElementById('emailInput').value;
+      if (!email || !email.includes('@')) {
+        document.getElementById('emailInput').style.borderColor = 'rgba(212,80,10,0.6)';
+        return;
+      }
+      document.querySelector('.notify-form').style.display = 'none';
+      document.getElementById('thanks').style.display = 'block';
+    }
+  </script>
+</body>
+</html>
+const launchDate = new Date('2026-12-05T00:00:00');
